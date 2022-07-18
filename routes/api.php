@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/book',BookController::class);
+Route::apiResource('/book',BookController::class)->middleware('protected_page');
+
+// Route::view('user','user')->middleware('protected_page');
+
+Route::view('no_access','no_access');
