@@ -40,7 +40,7 @@ class BorrowingController extends Controller
 
 
         // $borrowing = DB::table('borrowings')
-        //     ->leftJoin('books','borrowings.book_id', '=', 'books.book_id')
+        //     ->leftJoin('books','borrowings.book_id', '=', 'books.id')
         //     ->get();
         // return $borrowing;    
     }
