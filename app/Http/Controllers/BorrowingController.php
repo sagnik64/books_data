@@ -44,4 +44,26 @@ class BorrowingController extends Controller
         //     ->get();
         // return $borrowing;    
     }
+
+    public function borrowings_by_book_title($title) {
+
+        $borrowing = DB::table('borrowings')
+            ->leftJoin('books','borrowings.book_id', '=', 'books.id')
+            ->leftJoin('students','borrowings.student_id','=','students.id')
+            ->where("books.title","like",$title."%")
+            ->select('borrowings.id', 'borrowings.book_id', 'borrowings.student_id',
+                    'borrowings.date_borrowed', 'borrowings.date_return',
+                    'books.title','students.first_name','students.last_name')
+            ->orderBy('books.title')
+            ->get();
+        
+        if(count($borrowing)) {
+            return $borrowing;
+        }
+        else {
+            return response()->json([
+                'result' => 'no records found'
+            ]);
+        }
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowingController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,9 @@ Route::get('/borrowing_show', [BorrowingController::class, 'borrowing_show']);
 Route::post('/borrowing_save', [BorrowingController::class, 'borrowing_save']);
 
 Route::get('/find_all_borrowings_by_book_id/{id}', [BorrowingController::class, 'show_borrowing_by_book_id']);
+
+Route::get('/search_all_borrowings_by_book_title/{title}', [BorrowingController::class, 'borrowings_by_book_title']);
+
+//StudentController
+Route::get('student_get', [StudentController::class,'student_get']);
+Route::post('student_post', [StudentController::class,'student_post']);

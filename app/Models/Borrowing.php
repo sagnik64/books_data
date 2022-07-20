@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
 
 class Borrowing extends Model
 {
@@ -21,4 +22,8 @@ class Borrowing extends Model
         'date' => 'date_borrowed',
         'date' => 'date_return'
     ];
+
+    public function students() {
+        return $this->hasOne(Student::class);
+    }
 }
