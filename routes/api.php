@@ -38,3 +38,4 @@ Route::get('/search_all_borrowings_by_book_title/{title}', [BorrowingController:
 //StudentController
 Route::get('student_get', [StudentController::class,'student_get']);
 Route::post('student_post', [StudentController::class,'student_post']);
+

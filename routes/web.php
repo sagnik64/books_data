@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::post('user_login',[StudentController::class,'userLogin']);
+
+Route::view('profile','profile');
+
+
+Route::get('login', function () {
+    if(session()->has('email')) {
+        return redirect('profile');
+    }
+    return view('login');
+});
+
+Route::get('logout', function () {
+    if(session()->has('email') && session()->has('issued_books')) {
+        session()->pull('email');
+        session()->pull('issued_books');
+    }
+    return redirect('login');
+});
+
+Route::get('book_list', function () {
+    return view('book_list');
+});
