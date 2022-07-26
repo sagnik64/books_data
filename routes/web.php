@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Models\Book;
+use Livewire\WithPagination;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,11 @@ Route::get('logout', function () {
     return redirect('login');
 });
 
+
 Route::get('book_list', function () {
-    return view('book_list');
+    
+    $bookList = Book::select('title as T', 'author as AR')
+                ->where('quantity', '>' , 0)->paginate(5);
+    return view('book_list',['book_list_data' => $bookList ]);
 });
+
