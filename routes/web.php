@@ -49,4 +49,3 @@ Route::get('book_list', function () {
                 ->where('quantity', '>' , 0)->paginate(5);
     return view('book_list',['book_list_data' => $bookList ]);
 });
-
