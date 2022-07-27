@@ -26,6 +26,7 @@
     </div>
     <br>
     <div>
+        Page:
         {{$book_list_data->currentPage()}}
     </div>
     <br><br><br><br>

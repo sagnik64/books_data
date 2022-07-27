@@ -12,24 +12,44 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
     public function student_get() {
-        return Student::all();
+        $student = Student::all();
+        if(!$student->isEmpty()) {
+            return response()->json([
+                "success" => "true",
+                "code" => 200,
+                "message" => "Student data found",
+                "data" => $student
+            ],200);
+        }
+        else {
+            return response()->json([
+                "success" => "false",
+                "code" => 400,
+                "message" => "Student data not found"
+            ],400);
+        }
     }
 
     public function student_post(Request $request) {
         
         $student = Student::create($request->all());
+
         if($student) {
             return response()->json([
-                "result" => "Student data saved successfully"
-            ]);
+                "success" => "true",
+                "code" => 201,
+                "message" => "Student data saved successfully",
+                "data" => $student
+            ],201);
         }
         else {
             return response()->json([
-                'result' => 'Failed to save data'
-            ],401);
+                "success" => "false",
+                "code" => 400,
+                "message" => "Failed to save student data"
+            ],400);
         }
     }
-
 
 
     public function userLogin(Request $request) {
@@ -51,10 +71,7 @@ class StudentController extends Controller
         $student = Student::where('student_email','=', session('email'))
                     ->where('student_password','=',$request->password)->get();
 
-        $list_of_books = Book::select('title as T', 'author as AR')
-                                ->where('quantity', '>' , 0)->get();
         
-        $request->session()->put('book_list', $list_of_books);
         
         // echo $list_of_books;
         // return;
@@ -80,7 +97,10 @@ class StudentController extends Controller
         if(count($student)) {
             return redirect('profile');
         }
-        return response()->json(["message" => "Wrong email or password"],401);
-        
+        return response()->json([
+            "success" => "false",
+            "code" => 401,
+            "message" => "Wrong email or password"
+        ],401);  
     }
 }

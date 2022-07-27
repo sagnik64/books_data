@@ -16,10 +16,19 @@ class BookController extends Controller
     {
         $book = Book::all();
         if(!$book->isEmpty()) {
-            return $book;
+            return response()->json([
+                "success" => "true",
+                "code" => 200,
+                "message" => "Book data found",
+                "data" => $book
+            ],200);
         }
         else {
-            return ["result" => "no records found"];
+            return response()->json([
+                "status" => "fail",
+                "code" => 400,
+                "message" => "Book data not found"
+            ],400);
         }
     }
 
@@ -43,10 +52,19 @@ class BookController extends Controller
     {
         $book = Book::create($request->all());
         if($book) {
-            return ["result" => "Book data saved successfully"];
+            return response()->json([
+                "success" => "true",
+                "code" => 201,
+                "message" => "Book data saved successfully",
+                "data" => $book
+            ],201);
         }
         else {
-            return ["result" => "Failed to save data"];
+            return response()->json([
+                "success" => "false",
+                "code" => 400,
+                "message" => "Failed to save book data"
+            ],400);
         }
     }
 
@@ -58,7 +76,24 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return Book::find($book->id);
+        $findBook = Book::find($book->id);
+        if($findBook) {
+            return response()->json([
+                "success" => "true",
+                "code" => 200,
+                "message" => "Found book data with ID = $book->id",
+                "data" => $findBook
+            ],200);            
+        }
+
+        // TODO: Check why code is not going to the else block?
+        else {
+            return response()->json([
+                "success" => "false",
+                "code" => 404,
+                "message" => "Failed to find book data with ID = $book->id"
+            ],404);
+        } 
     }
 
     /**
@@ -84,10 +119,19 @@ class BookController extends Controller
         $book = Book::find($book->id);
         $book->update($request->all());
         if($book) {
-            return ["result" => "Book data updated successfully"];
+            return response()->json([
+                "success" => "true",
+                "code" => 200,
+                "message" => "Book data with ID = $book->id updated successfully",
+                "data" => $book
+            ],200);  
         }
         else {
-            return ["result" => "Failed to update data"];
+            return response()->json([
+                "success" => "false",
+                "code" => 404,
+                "message" => "Failed to update book data with ID = $book->id"
+            ],404);
         }
     }
 
@@ -99,14 +143,22 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        $book = Book::destroy($book->id);
-        if($book) {
-            return ["result" => "Book data deleted successfully"];
+        $bookFind = Book::find($book->id);
+        $bookDelete = Book::destroy($book->id);
+        if($bookDelete) {
+            return response()->json([
+                "success" => "true",
+                "code" => 200,
+                "message" => "Book data with ID = $book->id deleted successfully",
+                "data" => $bookFind
+            ],200);  
         }
         else {
-            return ["result" => "Failed to delete data"];
+            return response()->json([
+                "success" => "false",
+                "code" => 404,
+                "message" => "Failed to delete book data with ID = $book->id"
+            ],404);
         }
     }
-
-
 }

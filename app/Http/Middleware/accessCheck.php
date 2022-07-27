@@ -27,7 +27,11 @@ class accessCheck
         }
 
         if(!$request->key || ($request->key !== "1234")) {
-            return redirect('api/no_access');
+            return response()->json([
+                "success" => "false",
+                "code" => 401,
+                "message" => "Authentication credentials were missing or incorrect",
+            ],401);
         }
         return $next($request);
     }
