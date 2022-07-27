@@ -3,7 +3,7 @@
     <div>
         <h2>Book List</h2>
     </div>
-    <div style="text-align: center;">
+    <div style="text-align: center; font-size:14pt;">
         <?php
         if(count($book_list_data)) {
             foreach($book_list_data as $data) {
