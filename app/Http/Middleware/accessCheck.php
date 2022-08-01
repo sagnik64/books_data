@@ -26,7 +26,10 @@ class accessCheck
             return response()->json($isValid->errors(),401);
         }
 
-        if(!$request->key || ($request->key !== "1234")) {
+        $authKey = $request->header('key');
+
+        if(!$authKey  || ($authKey  !== env('API_KEY'))) {
+
             return response()->json([
                 "success" => "false",
                 "code" => 401,

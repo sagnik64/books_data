@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+    /**
+     * Get the list of student from db
+     * 
+     */
     public function student_get() {
         $student = Student::all();
         if(!$student->isEmpty()) {
@@ -30,6 +34,13 @@ class StudentController extends Controller
         }
     }
 
+     /**
+     * Create new student in db
+     * 
+     * @ Request $request request body
+     * 
+     * @return array
+     */
     public function student_post(Request $request) {
         
         $student = Student::create($request->all());

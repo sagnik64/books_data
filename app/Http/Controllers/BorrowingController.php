@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class BorrowingController extends Controller
 {
+    /**
+     * Display a listing of the borrowing data
+     * 
+     * @return response()->json
+     */
     public function borrowing_show() {
         $borrowing = Borrowing::all();
 
@@ -31,6 +36,12 @@ class BorrowingController extends Controller
         }
     }
 
+    /**
+     * Store a newly created borrowing data in database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return response()->json
+     */
     public function borrowing_save(Request $request) {
         
         $borrowing = Borrowing::create($request->all());
@@ -54,7 +65,7 @@ class BorrowingController extends Controller
     public function show_borrowing_by_book_id(Request $request) {
         
 
-        // return Book::find(1)->borrowings;
+        // return Book::find($request->id)->borrowings;
 
         $book = Book::find($request->id)->borrowings;
 

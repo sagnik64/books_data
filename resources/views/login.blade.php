@@ -6,6 +6,7 @@
     
 </div>
 
+
 <div style="display:flex; align-items: center; justify-content:center;" >
     <form action='user_login' method='POST'>
         @csrf

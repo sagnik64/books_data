@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Models\Book;
-use Livewire\WithPagination;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 
 
-Route::post('user_login',[StudentController::class,'userLogin']);
+
 
 Route::view('profile','profile');
 
@@ -49,3 +49,5 @@ Route::get('book_list', function () {
                 ->where('quantity', '>' , 0)->paginate(5);
     return view('book_list',['book_list_data' => $bookList ]);
 });
+
+Route::post('user_login',[StudentController::class,'userLogin']);

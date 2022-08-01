@@ -79,21 +79,18 @@ class BookController extends Controller
         $findBook = Book::find($book->id);
         if($findBook) {
             return response()->json([
-                "success" => "true",
+                "success" => true,
                 "code" => 200,
                 "message" => "Found book data with ID = $book->id",
                 "data" => $findBook
             ],200);            
         }
 
-        // TODO: Check why code is not going to the else block?
-        else {
-            return response()->json([
-                "success" => "false",
-                "code" => 404,
-                "message" => "Failed to find book data with ID = $book->id"
-            ],404);
-        } 
+        return response()->json([
+            "success" => false,
+            "code" => 401,
+            "message" => "Failed to find book data with ID = $book->id"
+        ],404);
     }
 
     /**
