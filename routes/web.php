@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Models\Book;
+use App\Http\Controllers\CookieController;
 
 
 /*
@@ -51,3 +52,6 @@ Route::get('book_list', function () {
 });
 
 Route::post('user_login',[StudentController::class,'userLogin']);
+
+Route::get('/cookie/set',[CookieController::class,'setCookie']);
+Route::get('/cookie/get',[CookieController::class,'getCookie']);
